@@ -1,14 +1,14 @@
 const fs = require("fs");
 const path = require("path");
-const input = fs.readFileSync(path.join(__dirname, "./images.txt")).toString();
+const input = fs.readFileSync(path.join(__dirname, "./test.txt")).toString();
 
 const images = JSON.parse(input);
 
 console.log(`Total Images: ${images.payload.images.length}`);
 
-const deviceNames = seperateByDevices(images);
+let deviceNames = seperateByDevices();
 
-function seperateByDevices(images) {
+function seperateByDevices() {
   let deviceNames = {};
   for (image of images.payload.images) {
     const day = new Date(image.datetimeReceived).toDateString();
@@ -31,6 +31,7 @@ function countImagesByDay(images) {
       day[date] = 1;
     }
   }
+  console.log(day);
   return day;
 }
 
